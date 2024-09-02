@@ -1,0 +1,28 @@
+--- old_version.py
++++ new_version.py
+@@ -1,5 +1,13 @@
+ import matplotlib.pyplot as plt
+ import numpy as np
++
++def calculate_ratio(stock1, stock2):
++    return stock1 / stock2
++
++def plot_ratios(dates, ratios, upper_bound, lower_bound):
++    plt.plot(dates, ratios, label='Stock Ratio')
++    plt.axhline(y=upper_bound, color='r', linestyle='--', label='Upper Bound')
++    plt.axhline(y=lower_bound, color='g', linestyle='--', label='Lower Bound')
++    plt.legend()
++    plt.show()
+ 
+-def main():
+-    pass
++def main():
++    # Example data
++    dates = np.arange('2023-01', '2024-01', dtype='datetime64[M]')
++    stock1 = np.random.rand(len(dates))
++    stock2 = np.random.rand(len(dates)) + 0.5
++    ratios = calculate_ratio(stock1, stock2)
++    avg_ratio = np.mean(ratios)
++    upper_bound = avg_ratio * 1.10
++    lower_bound = avg_ratio * 0.90
++    plot_ratios(dates, ratios, upper_bound, lower_bound)
